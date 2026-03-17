@@ -10,7 +10,13 @@ class CharacterCard extends StatelessWidget {
     return Card(
       child: Padding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 8),
-        child: Row(children: [Text(character)]),
+        child: Row(
+          children: [
+            Text(character),
+            Expanded(child: SizedBox()),
+            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward)),
+          ],
+        ),
       ),
     );
   }
