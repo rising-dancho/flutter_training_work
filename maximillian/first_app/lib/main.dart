@@ -28,3 +28,6 @@ void main() {
 }
 
 // Container is useful for styling
+class GradientContainer extends StatelessWidget {
+  
+}
