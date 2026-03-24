@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+import 'package:web_app_tutorial/widgets/call_to_action/call_to_action_mobile.dart';
+import 'package:web_app_tutorial/widgets/call_to_action/call_to_action_tablet_desktop.dart';
 
-class CallToAction extends StatelessWidget {
+class CallToAction extends StatefulWidget {
   final String title;
-  const CallToAction({super.key, required this.title});
+  final VoidCallback? onTap;
+
+  const CallToAction({super.key, required this.title, this.onTap});
 
   @override
+  State<CallToAction> createState() => _CallToActionState();
+}
+
+class _CallToActionState extends State<CallToAction> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Color.fromARGB(255, 31, 229, 146),
-          borderRadius: BorderRadius.circular(5)),
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 60, vertical: 15),
-      child: Text(title,
-          style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
+    return ScreenTypeLayout.builder(
+      mobile: (_) => CallToActionMobile(
+        title: "Join course",
+        onTap: () {},
+      ),
+      desktop: (_) =>
+          CallToActionTabletDesktop(title: "Join course", onTap: () {}),
+      tablet: (_) =>
+          CallToActionTabletDesktop(title: "Join course", onTap: () {}),
     );
   }
 }

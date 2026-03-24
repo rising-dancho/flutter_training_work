@@ -1,45 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+import 'package:web_app_tutorial/widgets/navigation_bar/navigation_bar_mobile.dart';
+import 'package:web_app_tutorial/widgets/navigation_bar/navigation_bar_tablet_desktop.dart';
 
 class NavigationBar extends StatelessWidget {
   const NavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            height: 80,
-            width: 150,
-            child: Image.asset("assets/logo.png"),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _NavBarItem(title: "Episodes"),
-              SizedBox(
-                width: 60,
-              ),
-              _NavBarItem(title: "About")
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _NavBarItem extends StatelessWidget {
-  final String title;
-  const _NavBarItem({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: TextStyle(fontSize: 18),
+    // this ScreenTypeLayout allows you to pass in a widget for a specific screentype: mobile, tablet, mobile, desktop
+    return ScreenTypeLayout.builder(
+      mobile: (_) => NavigationBarMobile(), // function returning the widget
+      tablet: (_) => NavigationBarTabletDesktop(),
+      desktop: (_) => NavigationBarTabletDesktop(), // optional: same as tablet
     );
   }
 }

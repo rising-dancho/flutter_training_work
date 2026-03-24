@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart' hide NavigationBar;
-import 'package:web_app_tutorial/widgets/call_to_action/call_to_action.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+import 'package:web_app_tutorial/views/home/home_content_desktop.dart';
+import 'package:web_app_tutorial/views/home/home_contnet_mobile.dart';
 import 'package:web_app_tutorial/widgets/centered_view/centered_view.dart';
-import 'package:web_app_tutorial/widgets/course_details/course_details.dart';
 import 'package:web_app_tutorial/widgets/navigation_bar/navigation_bar.dart';
 
 class HomeView extends StatelessWidget {
@@ -9,21 +10,16 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       body: CenteredView(
         child: Column(
           children: [
             NavigationBar(),
             Expanded(
-                child: Row(
-              children: [
-                CourseDetails(),
-                Expanded(
-                    child: Center(
-                  child: CallToAction(title: "Join Course"),
-                ))
-              ],
+                child: ScreenTypeLayout.builder(
+              mobile: (_) => HomeContnetMobile(),
+              desktop: (_) => HomeContentDesktop(),
             ))
           ],
         ),
