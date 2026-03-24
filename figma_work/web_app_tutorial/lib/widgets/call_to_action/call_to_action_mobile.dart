@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_app_tutorial/constants/app_colors.dart';
 
 class CallToActionMobile extends StatefulWidget {
   final String title;
@@ -15,7 +16,7 @@ class _CallToActionMobileState extends State<CallToActionMobile> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 31, 229, 146),
+          color: primaryColor,
           borderRadius: BorderRadius.circular(5)),
       height: 60,
       alignment: Alignment.center,

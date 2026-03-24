@@ -12,7 +12,13 @@ class NavigationBarMobile extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+          Builder(
+              builder: (ctx) => IconButton(
+                    icon: Icon(Icons.menu),
+                    onPressed: () {
+                      Scaffold.of(ctx).openDrawer();
+                    },
+                  )),
           NavbarLogo()
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_app_tutorial/constants/app_colors.dart';
 
 class CallToActionTabletDesktop extends StatefulWidget {
   final String title;
@@ -23,8 +24,7 @@ class _CallToActionTabletDesktopState extends State<CallToActionTabletDesktop> {
         hoverColor: Colors.transparent, // no hover color
         child: Container(
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 31, 229, 146),
-              borderRadius: BorderRadius.circular(5)),
+              color: primaryColor, borderRadius: BorderRadius.circular(5)),
           padding: EdgeInsets.symmetric(horizontal: 60, vertical: 15),
           child: Text(widget.title,
               style: TextStyle(
