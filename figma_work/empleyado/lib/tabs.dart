@@ -7,94 +7,77 @@ class Tabs extends StatefulWidget {
   State<Tabs> createState() => _TabsState();
 }
 
-class _TabsState extends State<Tabs> with TickerProviderStateMixin {
-  late TabController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TabController(length: 5, vsync: this);
-  }
+class _TabsState extends State<Tabs> {
+  int _currentIndex = 0;
 
   void _switchTab(int index) {
-    // Switch instantly with no animation
-    _controller.animateTo(index, duration: Duration.zero);
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  Widget _buildPage() {
+    switch (_currentIndex) {
+      case 0:
+        return const Center(child: Text('Dashboard Screen'));
+      case 1:
+        return const Center(child: Text('Bulletin Screen'));
+      case 2:
+        return const Center(child: Text('Events Screen'));
+      case 3:
+        return const Center(child: Text('Marketplace Screen'));
+      case 4:
+        return const Center(child: Text('Jobs Screen'));
+      default:
+        return const SizedBox();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TabBar(
-          controller: _controller,
-          onTap: _switchTab,
-          tabs: [
-            Tab(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.dashboard),
-                  SizedBox(width: 8),
-                  Text("Dashboard"),
-                ],
+    return DefaultTabController(
+      length: 5,
+      initialIndex: _currentIndex, // sync initial state
+      child: Column(
+        children: [
+          TabBar(
+            onTap: _switchTab,
+            tabs: const [
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Icon(Icons.dashboard), Text("Dashboard")],
+                ),
               ),
-            ),
-            Tab(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.feed),
-                  SizedBox(width: 8),
-                  Text("Bulletin"),
-                ],
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Icon(Icons.feed), Text("Bulletin")],
+                ),
               ),
-            ),
-            Tab(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.event),
-                  SizedBox(width: 8),
-                  Text("Events"),
-                ],
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Icon(Icons.event), Text("Events")],
+                ),
               ),
-            ),
-            Tab(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.shop),
-                  SizedBox(width: 8),
-                  Text("Marketplace"),
-                ],
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Icon(Icons.shop), Text("Marketplace")],
+                ),
               ),
-            ),
-            Tab(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.work),
-                  SizedBox(width: 8),
-                  Text("Jobs"),
-                ],
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Icon(Icons.work), Text("Jobs")],
+                ),
               ),
-            ),
-          ],
-        ),
-        Expanded(
-          child: TabBarView(
-            controller: _controller,
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              Center(child: Text('Dashboard Screen')),
-              Center(child: Text('Bulletin Screen')),
-              Center(child: Text('Events Screen')),
-              Center(child: Text('Marketplace Screen')),
-              Center(child: Text('Jobs Screen')),
             ],
           ),
-        ),
-      ],
+          Expanded(child: _buildPage()),
+        ],
+      ),
     );
   }
 }
